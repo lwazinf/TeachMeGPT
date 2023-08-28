@@ -1,0 +1,46 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Federo&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  body {
+    background: #f9fafb;
+  }
+}
+
+@layer components {
+  ._inter {
+    font-family: "Inter", sans-serif;
+  }
+
+  ._monts {
+    font-family: "Montserrat", sans-serif;
+  }
+
+  ._federo {
+    font-family: "Federo", sans-serif;
+  }
+
+  ._oswald {
+    font-family: 'Oswald', sans-serif;
+  }
+
+  input,
+  textarea {
+    border: none;
+    resize: none;
+    background-color: rgb(0 0 0 / 0);
+  }
+
+  input:focus,
+  textarea:focus {
+    outline: none;
+    background-color: rgb(0 0 0 / 0);
+  }
+}
