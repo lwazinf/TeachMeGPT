@@ -1,20 +1,22 @@
 "use client";
 
 import {
-  faAd,
   faAdd,
   faArrowRight,
   faQuestion,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useEffect, useRef, useState } from "react";
 import ReactTextareaAutosize from "react-textarea-autosize";
+import { Answers_, Detail_, MultiChoice_ } from "./utils/AuxUI_";
 
 interface Card_Props {
   type_: string;
 }
 
 const Card_ = ({ type_ }: Card_Props) => {
+  
   return (
     <div
       className={`flex flex-col justify-center items-center w-[450px] min-h-[200px] bg-white shadow-md rounded-[8px] relative overflow-hidden m-2`}
@@ -27,9 +29,9 @@ const Card_ = ({ type_ }: Card_Props) => {
         >
           <p className={`font-medium text-[17px]`}>Google Sheets</p>
           <FontAwesomeIcon
-          icon={faQuestion}
-          className={`w-[9px] cursor-pointer hover:text-black text-black/30 transition-all duration-200 px-[6px] rounded-[5px] ml-auto mr-2`}
-        />
+            icon={faQuestion}
+            className={`w-[9px] cursor-pointer hover:text-black text-black/30 transition-all duration-200 px-[6px] rounded-[5px] ml-auto mr-2`}
+          />
           <FontAwesomeIcon
             icon={faTimes}
             className={`w-[12px] text-black/30 cursor-pointer hover:text-black transition-all duration-200`}
@@ -50,32 +52,19 @@ const Card_ = ({ type_ }: Card_Props) => {
         {type_ == "multichoice"
           ? [1, 2, 3].map((obj_, index) => {
               return (
-                <div
-                  className={`flex flex-row justify-between items-center w-full h-[60px] px-4 bg-black/5 rounded-md mb-3 hover:bg-black/20 hover:px-5 cursor-pointer transition-all duration-500 hover:duration-0`}
-                  key={index}
-                >
-                  <p className={`text-[13px] text-black/50`}>Google Sheets</p>
-                  <FontAwesomeIcon
-                    icon={obj_ !== 3 ? faArrowRight : faAdd}
-                    className={`w-[12px] text-black/30 cursor-pointer hover:text-black transition-all duration-200`}
-                  />
-                </div>
+                <MultiChoice_ key={obj_} obj_={obj_}/>
               );
             })
-          : type_ == "detail" &&
+          : type_ == "detail" ?
             [1].map((obj_, index) => {
               return (
-                <div
-                  className={`flex flex-col justify-between items-center w-full min-h-[60px] px-4 bg-black/5 rounded-md mb-3 hover:bg-black/20 transition-all duration-500 hover:duration-0 relative`}
-                  key={index}
-                >
-                  <ReactTextareaAutosize
-                    maxRows={5}
-                    className={`w-full h-[100%] text-[13px] text-black/50 leading-4 text-left`}
-                  />
-                </div>
+                <Detail_ key={obj_}/>
               );
-            })}
+            }) : type_ == "answers" && [1, 2, 3].map((obj_, index) => {
+                return (
+                  <Answers_ key={obj_} obj_={obj_}/>
+                );
+              })}
       </div>
     </div>
   );
