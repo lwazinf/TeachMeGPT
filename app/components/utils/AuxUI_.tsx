@@ -1,6 +1,8 @@
 import { faAdd, faArrowRight } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { AnswerState } from "../atoms/atoms";
 
 // // // // // // // // MultiChoice_
 
@@ -11,6 +13,7 @@ interface MultiChoice_Props {
 export const MultiChoice_ = ({ obj_ }: MultiChoice_Props) => {
   const textAreaRef = useRef(null);
   const [value_, setValue_] = useState("");
+  const [selectedA_, setSelectedA_] = useRecoilState(AnswerState)
 
   const handleChange = (e: any) => {
     setValue_(e.target.value);
@@ -41,14 +44,23 @@ export const MultiChoice_ = ({ obj_ }: MultiChoice_Props) => {
 
 // // // // // // // // Detail_
 
-interface Detail_Props {}
+interface Detail_Props {
+  data: any,
+  trigger: boolean
+}
 
-export const Detail_ = ({}: Detail_Props) => {
+export const Detail_ = ({data, trigger}: Detail_Props) => {
   const textAreaRef = useRef(null);
   const [value_, setValue_] = useState("");
+  const [selectedA_, setSelectedA_] = useRecoilState(AnswerState)
 
   const handleChange = (e: any) => {
-    setValue_(e.target.value);
+    setValue_(e);
+    if(e.length == 0){
+      setSelectedA_({data: '', answer: ''});
+    }else{
+      setSelectedA_({data: `${data.index} - ${data.Q}`, answer: e});
+    }
   };
 
   useEffect(() => {
@@ -61,6 +73,10 @@ export const Detail_ = ({}: Detail_Props) => {
         textAreaRef.current.scrollHeight + "px";
     }
   }, [value_]);
+
+  useEffect(() => {
+    setValue_('')
+  }, [trigger])
   return (
     <div
   className={`flex flex-col justify-between items-center w-full min-h-[60px] px-4 ${
@@ -71,7 +87,9 @@ export const Detail_ = ({}: Detail_Props) => {
     ref={textAreaRef}
     value={value_}
     placeholder={`Type your answer here..`}
-    onChange={handleChange}
+    onChange={(obj__) => {
+      handleChange(obj__.target.value)
+    }}
     className={`py-1 w-full text-[13px] text-black/50 leading-4 text-left`}
     style={{
       overflow: 'hidden', // To hide scrollbars when not needed
