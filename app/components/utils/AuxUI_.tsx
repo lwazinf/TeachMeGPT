@@ -7,33 +7,35 @@ import { AnswerState } from "../atoms/atoms";
 // // // // // // // // MultiChoice_
 
 interface MultiChoice_Props {
-  obj_: any;
+  data: any,
+  trigger: boolean
 }
 
-export const MultiChoice_ = ({ obj_ }: MultiChoice_Props) => {
-  const textAreaRef = useRef(null);
-  const [value_, setValue_] = useState("");
+export const MultiChoice_ = ({ data, trigger }: MultiChoice_Props) => {
   const [selectedA_, setSelectedA_] = useRecoilState(AnswerState)
+  const [answer_, setAnswer_] = useState('')
+  
+  const handleChange = () => {
+      setSelectedA_({data: `${data.index} - ${data.Q}`, answer: answer_});
+  };
 
-  const handleChange = (e: any) => {
-    setValue_(e.target.value);
+  const setAnswerWrapper = (newValue) => {
+    // Update the answer_ state using setAnswer_
+    setAnswer_(newValue);
   };
 
   useEffect(() => {
-    if (textAreaRef.current) {
-      // @ts-ignore
-      textAreaRef.current.style.height = "auto";
-      // @ts-ignore
-      textAreaRef.current.style.height =
-        // @ts-ignore
-        textAreaRef.current.scrollHeight + "px";
-    }
-  }, [value_]);
+    handleChange();
+  }, [answer_]);
   return (
     <div
       className={`flex flex-row justify-between items-center w-full h-[60px] px-4 bg-black/5 rounded-md mb-3 hover:bg-black/20 hover:px-5 cursor-pointer transition-all duration-500 hover:duration-0`}
+      onClick={() => 
+      {
+        setAnswerWrapper(data.option)
+      }}
     >
-      <p className={`text-[13px] text-black/50`}>Option</p>
+      <p className={`text-[13px] text-black/50`}>{data.option}</p>
       <FontAwesomeIcon
         icon={faArrowRight}
         className={`w-[12px] text-black/30 cursor-pointer hover:text-black transition-all duration-200`}

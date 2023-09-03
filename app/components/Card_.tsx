@@ -174,7 +174,13 @@ const Card_ = ({ section_ }: Card_Props) => {
         {section_.questions.length !== Object.keys(givenA_).length &&
         section_.type == "multichoice"
           ? [1, 2, 3].map((obj_, index) => {
-              return <MultiChoice_ key={index} obj_={obj_} />;
+              return (
+                <MultiChoice_
+                  key={index}
+                  data={{ index: section_.uid, Q: selectedQ_, option: obj_ }}
+                  trigger={trigger_}
+                />
+              );
             })
           : section_.type == "detail" &&
             [1].map((obj_, index) => {
