@@ -10,7 +10,9 @@
 
 @layer base {
   body {
-    background: #f9fafb;
+    /* background: #ffffff; */
+    background: #8e8f94
+    /* background: #e3e4e5; */
   }
 }
 
@@ -43,4 +45,8 @@
     outline: none;
     background-color: rgb(0 0 0 / 0);
   }
+}
+
+html {
+  scroll-behavior: smooth;
 }

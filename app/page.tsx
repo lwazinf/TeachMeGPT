@@ -1,28 +1,26 @@
 "use client";
 
-import Image from "next/image";
 import Card_ from "./components/Card_";
 import { useRecoilState } from "recoil";
-import { ObjectState, data_ } from "./components/atoms/atoms";
+import { DataState, ObjectState, data_ } from "./components/atoms/atoms";
+import Nav_ from "./components/Nav_";
 
 export default function Home() {
   const [object_, setObject_] = useRecoilState(ObjectState);
+  const [dataState_, setDataState_] = useRecoilState(DataState);
+
   return (
     <main className="flex min-h-screen flex-col items-center justify-start">
+      
       <div
-        className={`flex flex-col justify-center items-center min-w-[910px] min-h-screen`}
+        className={`w-full h-[60px] flex flex-row justify-end items-center px-4 fixed top-0 cursor-pointer`}
       >
-        {/* <div
-          className={`gap-4 justify-center items-center columns-2 min-w-[910px] min-h-2 py-8`}
+        <div
+          className={`min-w-[60px] px-2 pt-2 h-full flex flex-col justify-center items-center`}
+          onClick={() => {}}
         >
-          {data_.map((obj_, index) => {
-            return <Card_ section_={obj_} key={index} />;
-          })}
-        </div> */}
-        <div className="flex flex-wrap justify-center items-center gap-4">
-          {data_.map((obj_, index) => {
-            return <Card_ section_={obj_} key={index} />;
-          })}
+          <img className={`w-[50px]`} src={`/assets/MetaMask.svg`} />
+          <p className={`text-[10px] text-black/50`}>MetaMask</p>
         </div>
       </div>
     </main>

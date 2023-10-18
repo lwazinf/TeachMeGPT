@@ -1,4 +1,4 @@
-import { faAdd, faArrowRight } from "@fortawesome/free-solid-svg-icons";
+import { faAdd, faArrowRight, faCheck, faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
@@ -14,22 +14,19 @@ interface MultiChoice_Props {
 export const MultiChoice_ = ({ data, trigger }: MultiChoice_Props) => {
   const [selectedA_, setSelectedA_] = useRecoilState(AnswerState)
   const [answer_, setAnswer_] = useState('')
-  
-  const handleChange = () => {
-      setSelectedA_({data: `${data.index} - ${data.Q}`, answer: answer_});
-  };
 
   const setAnswerWrapper = (newValue) => {
     // Update the answer_ state using setAnswer_
-    setAnswer_(newValue);
+    setSelectedA_(newValue);
   };
 
   useEffect(() => {
-    handleChange();
   }, [answer_]);
   return (
     <div
-      className={`flex flex-row justify-between items-center w-full h-[60px] px-4 bg-black/5 rounded-md mb-3 hover:bg-black/20 hover:px-5 cursor-pointer transition-all duration-500 hover:duration-0`}
+      className={`flex flex-row justify-between items-center w-full h-[60px] rounded-md mb-3 ${
+        data.option !== selectedA_ ? "bg-black/5 hover:bg-black/20 hover:px-5 px-4 duration-500 hover:duration-0" : "bg-black/20 px-5 duration-0 hover:duration-500"
+      } cursor-pointer transition-all`}
       onClick={() => 
       {
         setAnswerWrapper(data.option)
@@ -37,7 +34,7 @@ export const MultiChoice_ = ({ data, trigger }: MultiChoice_Props) => {
     >
       <p className={`text-[13px] text-black/50`}>{data.option}</p>
       <FontAwesomeIcon
-        icon={faArrowRight}
+        icon={data.option == selectedA_ ? faCheck : faArrowRight}
         className={`w-[12px] text-black/30 cursor-pointer hover:text-black transition-all duration-200`}
       />
     </div>
