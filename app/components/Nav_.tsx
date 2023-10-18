@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useState } from "react";
 import { useRecoilState } from "recoil";
 import Router from "next/router";
+import { signIn_ } from "@/firebase";
 
 interface Nav_Props {}
 
@@ -76,7 +77,7 @@ const Nav_ = ({}: Nav_Props) => {
                   
                 }}
                 onClick={async () => {
-                  
+                  signIn_()
                 }}
               >
                 <FontAwesomeIcon
