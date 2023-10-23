@@ -1,27 +1,20 @@
 import {
   faAdd,
   faCog,
-  faEnvelope,
-  faNewspaper,
   faPaperPlane,
-  faPowerOff,
   faQrcode,
-  faSearch,
-  faTimes,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
-import { useRecoilState } from "recoil";
-import Router from "next/router";
 import { signIn_ } from "@/firebase";
+import { usePathname, useSearchParams } from 'next/navigation'
 
 interface Nav_Props {}
 
 const Nav_ = ({}: Nav_Props) => {
-
+  const pathname = usePathname()
   return (
-    <div className={`fixed left-4 flex min-h-screen justify-center items-center`}>
+    <div className={`fixed left-4 flex min-h-screen justify-center items-center ${pathname == '/' ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
       <div
         className={`md:w-[60px] min-w-0 md:h-[350px] h-[60px] rounded-lg shadow-sm bg-white/60 backdrop-blur-md md:flex-col flex-row justify-center items-center flex`}
       >

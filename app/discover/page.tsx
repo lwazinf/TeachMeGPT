@@ -13,6 +13,7 @@ import {
   faArrowRight,
   faBars,
   faHamburger,
+  faHeadphones,
   faPaperPlane,
   faPlane,
   faRobot,
@@ -20,6 +21,7 @@ import {
 import { lessonData_ } from "../components/utils/utils";
 import Nav_ from "../components/Nav_";
 import DiscoverChat_ from "../components/DiscoverChat_";
+import AudioPlayer_ from "../components/AudioPlayer_";
 
 export default function Home() {
   return (
@@ -186,10 +188,6 @@ const Discover_ = ({}) => {
                 src={`/assets/images/logo.png`}
                 className={`h-[40px] object-cover opacity-80`}
               />
-              <FontAwesomeIcon
-                icon={faBars}
-                className={`text-[12px] text-black/50 bg-slate-200 hover:text-white/80 hover:bg-black/80 cursor-pointer transition-all duration-200 rounded-[80%] p-[8px] flex flex-row justify-center items-center`}
-              />
             </div>
             <div className={`w-[90%] mx-auto h-[1px] bg-slate-200`} />
           </div>
@@ -326,6 +324,7 @@ const Discover_ = ({}) => {
                       : "text-black/50 hover:text-white/80 bg-slate-200 hover:bg-black/80"
                   } cursor-pointer transition-all duration-200`}
                 />
+                <AudioPlayer_ audioSource={`/assets/audio/`} book_={`${currDataIndex_+1}`} />
               </div>
               <div className={`flex flex-row justify-center items-center`}>
                 <div

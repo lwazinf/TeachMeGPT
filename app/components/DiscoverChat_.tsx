@@ -110,7 +110,7 @@ const DiscoverChat_ = ({ robot_, data_ }: DiscoverChat_Props) => {
 
   return (
     <div
-      className={`flex flex-row justify-start items-center min-w-[400px] duration-500 h-[600px] bg-black/30 rounded-[8px] relative transition-all overflow-hidden mr-2`}
+      className={`flex flex-row justify-start items-center min-w-[400px] duration-500 h-[600px] bg-black/30 rounded-[8px] relative transition-all overflow-hidden mr-2 ${robot_ ? 'pointer-events-auto' : 'pointer-events-none'}`}
     >
       <img
         className={`h-full w-full object-cover`}
