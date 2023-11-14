@@ -50,12 +50,12 @@ import {
               <p
                 className={`mt-auto text-[15px] font-black text-orange-200 cursor-default`}
               >
-                Move faster through us.
+                Eu velit voluptate anim et est quis.
               </p>
               <p
                 className={`text-[13px] font-medium text-orange-50 cursor-default`}
               >
-                Move faster through us. Move faster through us.
+                Ad cillum ex duis laboris in esse tempor sit commodo aute do.
               </p>
             </div>
             <div

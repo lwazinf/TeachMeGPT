@@ -62,3 +62,27 @@ export const AnswerState = atom({
     default: false,
   }); 
 
+  export const GenderState = atom({
+    key: "GenderState",
+    default: 'm',
+  }); 
+
+  export const ThisState = atom({
+    key: 'ThisState',
+    default: false,
+  })
+
+  export const ShowingState = atom({
+    key: 'ShowingState',
+    default: '',
+  })
+
+  export const UserState = atom<any>({
+    key: 'UserState',
+    default: null,
+  })
+
+  export const MenuState = atom<any>({
+    key: 'MenuState',
+    default: false,
+  })

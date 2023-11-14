@@ -40,18 +40,6 @@
     font-family: 'Oswald', sans-serif;
   }
 
-  .repeating-pattern {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: invert(100%); /* Invert colors for the pattern, optional */
-    background-image: url('/public/assets/badge.svg'); /* Replace with the path to your pattern image */
-    background-repeat: repeat;
-  }
-
   input,
   textarea {
     border: none;
@@ -68,4 +56,5 @@
 
 html {
   scroll-behavior: smooth;
+  scroll-behavior: 1000ms;
 }

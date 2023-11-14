@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, useState } from "react";
 import { useRecoilState } from "recoil";
 import { DataState, GenderState } from "../components/atoms/atoms";
@@ -122,7 +120,7 @@ const Trigger_ = ({}) => {
   );
 };
 
-const Discover_ = ({}) => {
+export const Discover_ = ({}) => {
   const [currIndex_, setCurrIndex_] = useState(0);
   const [robot_, setRobot_] = useState(false);
   const [currentData_, setCurrentData_] = useState<any>([])

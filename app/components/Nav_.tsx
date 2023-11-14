@@ -1,64 +1,59 @@
 import {
   faAdd,
+  faBook,
   faCog,
+  faGear,
+  faGears,
+  faHandBackFist,
   faPaperPlane,
+  faPeopleGroup,
+  faPerson,
+  faPlay,
   faQrcode,
   faUser,
+  faWandSparkles,
+  faWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { signIn_ } from "@/firebase";
-import { usePathname, useSearchParams } from 'next/navigation'
+import { usePathname, useRouter, useSearchParams } from 'next/navigation'
+import { useRecoilState } from "recoil";
+import { ShowingState, ThisState, MenuState } from "./atoms/atoms";
 
 interface Nav_Props {}
 
 const Nav_ = ({}: Nav_Props) => {
+  const [showing_, setShowing_] = useRecoilState(ShowingState);
+  const [menu_, setMenu_] = useRecoilState(MenuState);
   const pathname = usePathname()
+  const router = useRouter()
   return (
-    <div className={`fixed left-4 flex min-h-screen justify-center items-center ${pathname == '/' ? 'opacity-0 pointer-events-none' : 'opacity-100 pointer-events-auto'}`}>
       <div
-        className={`md:w-[60px] min-w-0 md:h-[350px] h-[60px] rounded-lg shadow-sm bg-white/60 backdrop-blur-md md:flex-col flex-row justify-center items-center flex`}
+        className={`md:w-[60px] min-w-0 md:min-h-2 min-h-2 rounded-lg md:flex-col flex-row justify-center items-center flex absolute bottom-[-130px] ${menu_ ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-200 transition-all`}
       >
-        {/* <div
-        className={`w-[80px] h-[120px] md:relative md:pointer-events-auto absolute pointer-events-none flex flex-row justify-center items-center`}
-      ></div> */}
-        {/* <div
-        className={`w-[80px] h-[1px] flex flex-row justify-center items-center bg-black/0 mb-8 mt-4`}
-      /> */}
         {[
           {
-            icon: faQrcode,
+            icon: faWrench,
             action: "navigate to homepage",
             element: "Home",
             alt: "auth",
           },
           {
-            icon: faAdd,
-            action: "add accom modal",
-            element: "Create",
+            icon: faBook,
+            action: "discover",
+            element: "discover",
             alt: "auth",
           },
           {
-            icon: faPaperPlane,
-            action: "popup filters",
-            element: "Requests",
-            alt: "auth",
-          },
-          {
-            icon: faCog,
-            action: "settings",
-            element: "Settings",
-            alt: "auth",
-          },
-          {
-            icon: faUser,
-            action: "authentication",
-            element: "Auth",
+            icon: faPlay,
+            action: "play",
+            element: "play",
             alt: "auth",
           },
         ].map((obj) => {
           return (
             <div
-              className={`w-[80px] h-[60px] flex flex-row justify-center items-center my-[1px]`}
+              className={`w-[80px] h-[40px] flex flex-row justify-center items-center my-[1px]`}
               key={obj.action}
             >
               <div
@@ -70,19 +65,36 @@ const Nav_ = ({}: Nav_Props) => {
                   
                 }}
                 onClick={async () => {
-                  signIn_()
+                  if(obj.action == "navigate to homepage"){
+                    router.push('/profile');
+                  } else if (obj.action == "play"){
+                    // router.push('/play');
+                    if(showing_ == 'play'){
+                      setShowing_('')
+                    }else{
+                      setShowing_('play')
+                    }
+                  } else if (obj.action == "discover"){
+                    // router.push('/discover');
+                    if(showing_ == 'discover'){
+                      setShowing_('')
+                    }else{
+                      setShowing_('discover')
+                    }
+                  } else if (obj.action == "auth"){
+                    router.push('/profile');
+                  }
                 }}
               >
                 <FontAwesomeIcon
                   icon={obj.icon}
-                  className={`w-[20px] h-[20px]`}
+                  className={`w-[18px] h-[18px]`}
                 />
               </div>
             </div>
           );
         })}
       </div>
-    </div>
   );
 };
 

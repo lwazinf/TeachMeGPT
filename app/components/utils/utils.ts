@@ -784,3 +784,31 @@ export const lessonData_ = [
     },
   ],
 ];
+
+
+export const landingData_ = [
+  {
+title: "Simplified Design",
+image: '/assets/gpt.png',
+first: "At InSho, we believe that learning about car insurance should come with a VIP experience. As an InSho graduate, you don't just leave with a wealth of knowledge; you gain access to an exclusive club of benefits through our dynamic partnerships with top-notch insurance providers. Imagine receiving insights and promotions directly from industry leaders – it's like having a backstage pass to the most sought-after concert in the car insurance universe.",
+second: "With InSho, education becomes an exhilarating journey where every graduate is a VIP. Get ready to step into a world where learning is not just about absorbing information but about experiencing the excitement of being at the forefront of car insurance trends. Your education doesn't end in the classroom; it begins with exclusive access and benefits that put you in the driver's seat of your car insurance adventure."
+  },
+  {
+title: "Technology",
+image: '/assets/gpt.png',
+first: "Learning about car insurance has never been this thrilling! InSho takes education to the next level with a gamified approach that transforms understanding policies into a high-speed adventure. Picture yourself racing through interactive quizzes, conquering challenges, and navigating simulations – each win propelling you closer to car insurance mastery. At InSho, education is not just enlightening; it's downright exhilarating.",
+second: "Our gamified learning experience turns complex concepts into a fun and engaging journey. Earn badges that showcase your achievements, climb leaderboards, and share the excitement with your fellow learners. InSho proves that education can be as thrilling as your favorite ride, making every lesson a memorable pit stop on your road to expertise. Get ready to gear up for a learning experience that's not just educational – it's an adventure waiting to be explored. 🚀🎮"
+  },
+  {
+title: "Smart Curriculum",
+image: '/assets/gpt.png',
+first: "InSho doesn't believe in one-size-fits-all when it comes to car insurance education. Our platform ensures that your learning experience is as unique as your favorite ride. Through our strategic partnerships, you'll enjoy benefits crafted specifically for you – from personalized policy calculators that align with your lifestyle to exclusive consultations with industry experts who understand your individual needs. At InSho, we're not just educating; we're customizing your journey to make sure you cruise through the world of car insurance with a tailored approach that suits your style.",
+second: "Imagine having a suite of benefits that cater to your preferences, ensuring that your car insurance decisions are not only informed but perfectly aligned with your distinctive requirements. InSho puts you in control, proving that education can be as customized and dynamic as the ride you choose to take."
+  },
+  {
+title: "Alumni Benefits",
+image: '/assets/gpt.png',
+first: "Graduating from InSho isn't just a certificate; it's an invitation to a world of celebration! As an InSho graduate, you become part of an exclusive community where learning is not confined to textbooks. Join us for virtual celebrations, exclusive events, and parties where you can connect with fellow graduates, share experiences, and maybe even have a few laughs. At InSho, graduation is not the finish line; it's a pit stop for endless fun and camaraderie.",
+second: "Our graduation galore extends the excitement beyond the educational journey, making your achievement a cause for celebration. It's not just about what you've learned; it's about the community you've joined and the experiences waiting for you as you continue your adventure in the world of car insurance. Get ready for a graduation like no other, where the fun is just beginning! 🎉👩‍🎓"
+  },
+]

@@ -2,7 +2,7 @@ import * as d3 from "d3";
 import { drag } from "d3";
 import { useRef, useEffect } from "react";
 
-export const LinePlot = ({ data, width = 800, height = 1000 }) => {
+export const LinePlot = ({ data, width = 300, height = 300 }) => {
   const svgRef = useRef();
 
   const category_ : any = {
@@ -86,9 +86,9 @@ export const LinePlot = ({ data, width = 800, height = 1000 }) => {
 
     const simulation = d3
       .forceSimulation()
-      .force("x", d3.forceX().strength(0.0005))
-      .force("y", d3.forceX().strength(0.0005))
-      .force("charge", d3.forceManyBody().strength(1))
+      .force("x", d3.forceX().strength(0.5))
+      .force("y", d3.forceX().strength(0.5))
+      .force("charge", d3.forceManyBody().strength(0.5))
       .force("center", d3.forceCenter(width / 2.5, height / 2))
       .force(
         "collide",

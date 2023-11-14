@@ -5,6 +5,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import { RecoilRoot } from "recoil";
 import Nav_ from "./components/Nav_";
+import Auth_ from "./components/Auth_";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -24,8 +25,10 @@ export default function RootLayout({
       <title>{metadata?.title}</title>
       <body className={inter.className}>
         <RecoilRoot>
-        <Nav_/>
-          {children}</RecoilRoot>
+        {/* <Nav_/> */}
+          {children}
+          <Auth_/>
+          </RecoilRoot>
       </body>
     </html>
   );

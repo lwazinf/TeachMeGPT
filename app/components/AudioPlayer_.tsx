@@ -1,6 +1,8 @@
 import { faHeadphones } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useRef, useState } from "react";
+import { useRecoilState } from "recoil";
+import { GenderState } from "./atoms/atoms";
 
 interface AudioPlayer_Props {
     audioSource: any,
@@ -10,6 +12,7 @@ interface AudioPlayer_Props {
 const AudioPlayer_ = ({audioSource, book_}: AudioPlayer_Props) => {
   const audioRef = useRef(null);
   const [playing_, setPlaying_] = useState(false)
+  const [gender_, setGender_] = useRecoilState(GenderState)
 
   const playAudio = () => {
     audioRef.current?.play();
@@ -26,7 +29,7 @@ const AudioPlayer_ = ({audioSource, book_}: AudioPlayer_Props) => {
         if (audioRef.current) {
           audioRef.current.load(); // Reload the audio element
         }
-      }, [book_]);
+      }, [book_, gender_]);
   return (
     <div className={`mx-2`}>
         <FontAwesomeIcon
@@ -45,7 +48,7 @@ const AudioPlayer_ = ({audioSource, book_}: AudioPlayer_Props) => {
                 }}
               />
       <audio ref={audioRef} controls={false}>
-        {[`${audioSource+book_+'/audio.mp3'}`].map((obj_, index) => {
+        {[`${audioSource+book_+'/'+gender_+'/audio.mp3'}`].map((obj_, index) => {
             return <source key={index} src={obj_} type="audio/mpeg" />
         })}
       </audio>
