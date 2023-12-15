@@ -15,7 +15,7 @@ export const MultiChoice_ = ({ data, trigger }: MultiChoice_Props) => {
   const [selectedA_, setSelectedA_] = useRecoilState(AnswerState)
   const [answer_, setAnswer_] = useState('')
 
-  const setAnswerWrapper = (newValue) => {
+  const setAnswerWrapper = (newValue: any) => {
     // Update the answer_ state using setAnswer_
     setSelectedA_(newValue);
   };
