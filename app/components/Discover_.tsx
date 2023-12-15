@@ -172,7 +172,7 @@ export const Discover_ = ({}) => {
 
   return (
     <div
-      className={`flex flex-row justify-center items-center w-[1000px] min-h-screen`}
+      className={`flex flex-row justify-center items-center w-[1000px] h-screen fixed top-0`}
     >
       <div
         className={`flex flex-row justify-start items-center w-full duration-500 min-h-[500px] p-1 bg-white rounded-[8px] relative mb-3 transition-all mx-1`}

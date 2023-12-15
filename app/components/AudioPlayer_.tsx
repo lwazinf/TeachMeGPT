@@ -15,11 +15,13 @@ const AudioPlayer_ = ({audioSource, book_}: AudioPlayer_Props) => {
   const [gender_, setGender_] = useRecoilState(GenderState)
 
   const playAudio = () => {
+                  // @ts-ignore
     audioRef.current?.play();
     setPlaying_(true)
   };
 
   const pauseAudio = () => {
+                  // @ts-ignore
     audioRef.current?.pause();
     setPlaying_(false)
   };
@@ -27,6 +29,7 @@ const AudioPlayer_ = ({audioSource, book_}: AudioPlayer_Props) => {
     // Use useEffect to update the audio source when the book prop changes
     useEffect(() => {
         if (audioRef.current) {
+                  // @ts-ignore
           audioRef.current.load(); // Reload the audio element
         }
       }, [book_, gender_]);

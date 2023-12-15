@@ -22,6 +22,7 @@ import { faBars, faPerson, faTimes } from "@fortawesome/free-solid-svg-icons";
 import { signIn_ } from "@/firebase";
 import { usePathname } from "next/navigation";
 import Nav_ from "./components/Nav_";
+import Auth_ from "./components/Auth_";
 
 export default function Home() {
   const [object_, setObject_] = useRecoilState(ObjectState);
@@ -32,7 +33,7 @@ export default function Home() {
       <Feature_ />
       {/* <Tech_ /> */}
       <Footer_ />
-      <Tag_ initials="Sho!" />
+      <Auth_/>
     </main>
   );
 }

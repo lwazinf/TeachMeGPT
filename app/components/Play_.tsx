@@ -5,11 +5,8 @@ import MainCard_ from "../components/Card_";
 import { DataState, ObjectState, data_ } from "../components/atoms/atoms";
 
 export default function Play_() {
-  const [object_, setObject_] = useRecoilState(ObjectState);
-  const [dataState_, setDataState_] = useRecoilState(DataState);
-
   return (
-    <main className="flex min-h-screen flex-col items-center justify-start">
+    <main className="flex min-h-screen flex-col items-center justify-start absolute top-0">
       <div
         className={`flex flex-col justify-center items-center min-w-[910px] min-h-screen`}
       >

@@ -6,6 +6,8 @@ import { Inter } from "next/font/google";
 import { RecoilRoot } from "recoil";
 import Nav_ from "./components/Nav_";
 import Auth_ from "./components/Auth_";
+import { Tag_ } from "./page";
+import Overlay_ from "./components/Overlay_";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -25,9 +27,11 @@ export default function RootLayout({
       <title>{metadata?.title}</title>
       <body className={inter.className}>
         <RecoilRoot>
-        {/* <Nav_/> */}
           {children}
-          <Auth_/>
+          {/* <div className={``}>
+
+          </div> */}
+          <Tag_ initials="Sho!" />
           </RecoilRoot>
       </body>
     </html>

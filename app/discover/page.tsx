@@ -158,6 +158,7 @@ const Discover_ = ({}) => {
 
   // Function to update the currIndex_ based on the scroll position
   const updateCurrIndex = () => {
+      // @ts-ignore
     const scrollTop = containerRef.current.scrollTop;
     const newIndex = Math.floor(scrollTop / frameHeight);
     setCurrIndex_(newIndex);
@@ -166,9 +167,11 @@ const Discover_ = ({}) => {
   // Add a scroll event listener to the container element
   useEffect(() => {
     const container = containerRef.current;
-    container.addEventListener("scroll", updateCurrIndex);
+    // @ts-ignore
+    container?.addEventListener("scroll", updateCurrIndex);
     return () => {
-      container.removeEventListener("scroll", updateCurrIndex);
+      // @ts-ignore
+      container?.removeEventListener("scroll", updateCurrIndex);
     };
   }, []);
 
@@ -200,7 +203,7 @@ const Discover_ = ({}) => {
             className={`w-full h-full overflow-scroll relative flex flex-col justify-start items-center`}
             ref={containerRef} // Attach the ref to the container element
           >
-            {currentData_.map((obj_, index) => {
+            {currentData_.map((obj_: any, index: any) => {
               return (
                 <div
                   key={index}
@@ -223,7 +226,7 @@ const Discover_ = ({}) => {
                   )}
                   {obj_.outcomes && (
                     <div className={``}>
-                      {obj_.outcomes?.map((obj__, index_) => {
+                      {obj_.outcomes?.map((obj__: any, index_: any) => {
                         return (
                           <div
                             className={`flex flex-col justify-center items-center my-4`}
@@ -244,7 +247,7 @@ const Discover_ = ({}) => {
                   )}
                   {obj_.jargon && (
                     <div className={``}>
-                      {obj_.jargon?.map((obj__, index_) => {
+                      {obj_.jargon?.map((obj__: any, index_: any) => {
                         return (
                           <div
                             className={`flex flex-col justify-center items-center my-4`}
@@ -265,7 +268,7 @@ const Discover_ = ({}) => {
                   )}
                   {obj_.steps && (
                     <div className={``}>
-                      {obj_.steps?.map((obj__, index_) => {
+                      {obj_.steps?.map((obj__: any, index_: any) => {
                         return (
                           <div
                             className={`flex flex-col justify-center items-center my-4`}

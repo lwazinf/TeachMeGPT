@@ -1,4 +1,5 @@
 import { initializeApp } from "firebase/app";
+import { v4 } from 'uuid';
 import {
     GoogleAuthProvider,
   createUserWithEmailAndPassword,
@@ -8,7 +9,7 @@ import {
   signInWithPopup,
   signOut,
 } from "firebase/auth";
-import { collection, getDocs, getFirestore, query, where } from "firebase/firestore";
+import { collection, doc, getDocs, getFirestore, query, setDoc, where } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 import { getAnalytics } from "firebase/analytics";
 import { useEffect, useState } from "react";
@@ -41,13 +42,23 @@ const provider = new GoogleAuthProvider()
 
 export { db, store, auth, analytics };
 
+export const recordTest_ = (data_: any) => {
+  const collection_ = collection(db, "tests");
+  setDoc(doc(collection_, v4()), data_)
+  .then(() => {
+    console.log('Data written to Firestore');
+  })
+  .catch((error) => {
+    console.error('Error writing to Firestore:', error);
+  });
+};
+
 export const checkUp_ = () => {
   return auth.currentUser == null;
 };
 
 export const signIn_ = async () => {
   return signInWithPopup(auth, provider).then((data) => {
-    console.log(data)
   });
 };
 
@@ -64,4 +75,15 @@ export const useAuth = () => {
     return unsub;
   }, []);
   return currentUser_;
+};
+
+export const getTests = async () => {
+ 
+  const colRef = collection(db, "tests");
+  // const query_ = await query(colRef, where('owner', '==', 'RUvdWw22QmYVqBF9VYxKmKtJPtI2'))
+  const data = await getDocs(colRef)
+  return data.docs.map((doc_) => ({
+    ...doc_.data(),
+    id: doc_.id,
+  }));
 };

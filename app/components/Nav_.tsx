@@ -9,13 +9,14 @@ import {
   faPeopleGroup,
   faPerson,
   faPlay,
+  faPowerOff,
   faQrcode,
   faUser,
   faWandSparkles,
   faWrench,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { signIn_ } from "@/firebase";
+import { signIn_, signOut_ } from "@/firebase";
 import { usePathname, useRouter, useSearchParams } from 'next/navigation'
 import { useRecoilState } from "recoil";
 import { ShowingState, ThisState, MenuState } from "./atoms/atoms";
@@ -29,7 +30,7 @@ const Nav_ = ({}: Nav_Props) => {
   const router = useRouter()
   return (
       <div
-        className={`md:w-[60px] min-w-0 md:min-h-2 min-h-2 rounded-lg md:flex-col flex-row justify-center items-center flex absolute bottom-[-130px] ${menu_ ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-200 transition-all`}
+        className={`md:w-[60px] min-w-0 md:min-h-2 min-h-2 rounded-lg md:flex-col flex-row justify-center items-center flex absolute bottom-[-150px] ${menu_ ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'} duration-200 transition-all`}
       >
         {[
           {
@@ -67,22 +68,28 @@ const Nav_ = ({}: Nav_Props) => {
                 onClick={async () => {
                   if(obj.action == "navigate to homepage"){
                     router.push('/profile');
+                    setMenu_(false) 
                   } else if (obj.action == "play"){
                     // router.push('/play');
                     if(showing_ == 'play'){
                       setShowing_('')
+                      setMenu_(false)
                     }else{
                       setShowing_('play')
+                      setMenu_(false)
                     }
                   } else if (obj.action == "discover"){
                     // router.push('/discover');
                     if(showing_ == 'discover'){
                       setShowing_('')
+                      setMenu_(false)
                     }else{
                       setShowing_('discover')
+                      setMenu_(false)
                     }
                   } else if (obj.action == "auth"){
                     router.push('/profile');
+                    setMenu_(false)
                   }
                 }}
               >
@@ -94,6 +101,20 @@ const Nav_ = ({}: Nav_Props) => {
             </div>
           );
         })}
+        <div
+                className={`min-h-[20px] min-w-[20px] flex flex-row justify-center items-center cursor-pointer text-black/40 hover:text-black/60 transition-all duration-200`}
+                onClick={async () => {
+                  setMenu_(false)
+                  signOut_()
+                  setShowing_('')
+                  router.push('/')
+                }}
+              >
+                <FontAwesomeIcon
+                  icon={faPowerOff}
+                  className={`w-[18px] h-[18px]`}
+                />
+              </div>
       </div>
   );
 };

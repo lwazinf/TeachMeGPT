@@ -96,7 +96,9 @@ const Gateway_ = ({}: Gateway_Props) => {
                 .then((e) => {
                   console.log(e)
                   setShowThis_(false);
+                  // @ts-ignore
                   if(e?.user){
+                    // @ts-ignore
                     setUser_(e?.user)
                   };
                 })

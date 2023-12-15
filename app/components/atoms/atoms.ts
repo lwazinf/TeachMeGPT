@@ -42,6 +42,11 @@ export const DataState = atom({
   default: {cs: '', t: '', q: [], tips: ''},
 }); 
 
+export const FocusState = atom({
+  key: "FocusState",
+  default: {},
+}); 
+
 export const AnswerState = atom({
     key: "AnswerState",
     default: {data: '', answer: ''},
@@ -55,6 +60,11 @@ export const AnswerState = atom({
   export const SignalState = atom({
     key: "SignalState",
     default: 0,
+  }); 
+
+  export const TestState = atom({
+    key: "TestState",
+    default: -1,
   }); 
 
   export const LoadingState = atom({
@@ -85,4 +95,19 @@ export const AnswerState = atom({
   export const MenuState = atom<any>({
     key: 'MenuState',
     default: false,
+  })
+
+  export const InterState = atom<any>({
+    key: 'InterState',
+    default: [],
+  })
+
+  export const BaselineState = atom<any>({
+    key: 'BaselineState',
+    default: {0: {}, 1: {}},
+  })
+
+  export const IndexState = atom<any>({
+    key: 'IndexState',
+    default: 0,
   })

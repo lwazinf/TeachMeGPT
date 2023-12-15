@@ -1,26 +1,26 @@
 "use client";
 
 import {
-  faAdd,
-  faArrowRight,
-  faInfinity,
+  faArrowRotateBack,
   faQuestion,
   faSpinner,
   faTimes,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
-import ReactTextareaAutosize from "react-textarea-autosize";
+import { useEffect, useState } from "react";
 import { Detail_, MultiChoice_ } from "./utils/AuxUI_";
-import { useRecoilState, useRecoilValue } from "recoil";
+import { useRecoilState } from "recoil";
 import {
   AnswerState,
   DataState,
   LoadingState,
   ObjectState,
   SignalState,
+  InterState,
+  UserState,
 } from "./atoms/atoms";
 import { curriculum_ } from "./utils/utils";
+import { recordTest_ } from "@/firebase";
 
 interface MainCard_Props {
   section_: any;
@@ -60,7 +60,7 @@ const TitleSection_ = ({ obj_ }: TitleSection_Props) => {
         className={`flex flex-row justify-between items-start w-full min-h-2 px-4 pt-6`}
       >
         <p className={`font-medium text-[17px]`}>{dataState_.t}</p>
-        <FontAwesomeIcon
+        {/* <FontAwesomeIcon
           icon={faQuestion}
           className={`w-[9px] cursor-pointer hover:text-black text-black/30 transition-all duration-200 px-[6px] rounded-[5px] ml-auto mr-2 mt-1`}
           onMouseEnter={() => {
@@ -69,14 +69,14 @@ const TitleSection_ = ({ obj_ }: TitleSection_Props) => {
           onMouseLeave={() => {
             setHint_(false);
           }}
-        />
-        <FontAwesomeIcon
-          icon={faTimes}
+        /> */}
+        {/* <FontAwesomeIcon
+          icon={faArrowRotateBack}
           className={`w-[12px] text-black/30 cursor-pointer hover:text-black transition-all duration-200 mt-1`}
           onClick={() => {
             setSignal_(signal_ + 1);
           }}
-        />
+        /> */}
       </div>
       <div
         className={`flex flex-row justify-between items-start w-full min-h-2 pl-4 pr-[28px] pt-2`}
@@ -157,12 +157,15 @@ interface Card_Props {
 const Card_ = ({ section_ }: Card_Props) => {
   const [object_, setObject_] = useRecoilState(ObjectState);
   const [signal_, setSignal_] = useRecoilState(SignalState);
+  const [user_, setUser_] = useRecoilState(UserState);
   const [givenA_, setGivenA_] = useState({});
+  const [aux_, setAux_] = useState({});
   const [trigger_, setTrigger_] = useState(true);
   const [loading_, setLoading_] = useRecoilState(LoadingState);
   const [selectedQ_, setSelectedQ_] = useState({ q: "", o: [] });
   const [selectedA_, setSelectedA_] = useRecoilState(AnswerState);
   const [dataState_, setDataState_] = useRecoilState(DataState);
+  const [inter_, setInter_] = useRecoilState(InterState);
 
   const URL = "https://api.openai.com/v1/chat/completions";
 
@@ -172,16 +175,21 @@ const Card_ = ({ section_ }: Card_Props) => {
 
     // Get a random list name
     const listNames = Object.keys(curriculum_);
+    const finalList = listNames.filter((obj_) => {
+      return !inter_.includes(obj_);
+    });
     const randomListName =
-      listNames[Math.floor(Math.random() * listNames.length)];
+      finalList[Math.floor(Math.random() * finalList.length)];
 
     // Get a random item from the selected list
     const randomList = curriculum_[randomListName];
     const randomItem =
       randomList[Math.floor(Math.random() * randomList.length)];
 
+    setAux_({ topic: randomItem, category: randomListName });
+
     // Print the random list name and item together
-    console.log(`List Name: "${randomListName}"\nRandom Item: "${randomItem}"`);
+    // console.log(`List Name: "${randomListName}"\nRandom Item: "${randomItem}"`);
 
     const payload = {
       model: "gpt-3.5-turbo",
@@ -210,7 +218,7 @@ const Card_ = ({ section_ }: Card_Props) => {
     });
 
     const data = await response.json();
-    console.log(JSON.parse(data?.choices[0].message.content));
+    // console.log(JSON.parse(data?.choices[0].message.content));
     setDataState_(JSON.parse(data?.choices[0].message.content));
 
     setSelectedQ_({ q: "", o: [] });
@@ -235,12 +243,42 @@ const Card_ = ({ section_ }: Card_Props) => {
   function handleQuestionAddition(question_: any) {
     console.log("handleQuestionAddition");
     const { q, ...dataTemp_ } = dataState_;
+
+    let result_ = 0;
     let tempList_ = [];
+
     for (const question in givenA_) {
-      tempList_.push({ q: question, a: givenA_[question] });
+      // Make the object extensible
+      const filteredObject = dataState_.q.find((obj_) => obj_.q === question);
+
+      if (filteredObject) {
+        let tempMap = new Map();
+
+        // Assuming filteredObject is an array of key-value pairs
+        for (const [key, value] of Object.entries(filteredObject)) {
+          tempMap.set(key, value);
+        }
+        tempList_.push(
+          Object.fromEntries(tempMap.set("given", givenA_[question]))
+        );
+        if (givenA_[question] == filteredObject.a) {
+          result_ = result_ + 1;
+        }
+      }
     }
+
     dataTemp_.q = tempList_;
-    console.log(dataTemp_);
+
+    let finalObj_ = new Map();
+    for (const [key, value] of Object.entries(dataTemp_)) {
+      finalObj_.set(key, value);
+    }
+    finalObj_.set("r", (result_ / 3) * 100);
+    finalObj_.set("uid", user_.uid);
+    finalObj_.set("c", aux_.category);
+
+    console.log(Object.fromEntries(finalObj_));
+    recordTest_(Object.fromEntries(finalObj_))
     getData();
   }
 

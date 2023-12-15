@@ -14,7 +14,7 @@ const DiscoverChat_ = ({ robot_, data_ }: DiscoverChat_Props) => {
   const [tempMessage_, setTempMessage_] = useState("");
   const [chatLoading_, setChatLoading_] = useState(false);
 
-  const handleInputChange = (event) => {
+  const handleInputChange = (event: any) => {
     setTempMessage_(event.target.value);
   };
 
@@ -63,7 +63,7 @@ const DiscoverChat_ = ({ robot_, data_ }: DiscoverChat_Props) => {
 
   const URL = "https://api.openai.com/v1/chat/completions";
 
-  const getData = async (userMessage) => {
+  const getData = async (userMessage: any) => {
     const payload = {
       model: "gpt-3.5-turbo",
       messages: [
