@@ -12,7 +12,6 @@ import {
 } from "../components/atoms/atoms";
 import Play_ from "../components/Play_";
 import { BG_ } from "../components/Hero_";
-import { Tag_ } from "../page";
 import LinePlot from "../components/Plot";
 import { curriculum_ } from "../components/utils/utils";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
