@@ -6,8 +6,8 @@ import { Inter } from "next/font/google";
 import { RecoilRoot } from "recoil";
 import Nav_ from "./components/Nav_";
 import Auth_ from "./components/Auth_";
-import { Tag_ } from "./page";
 import Overlay_ from "./components/Overlay_";
+import { Tag_ } from "./components/Tag_";
 
 const inter = Inter({ subsets: ["latin"] });
 
