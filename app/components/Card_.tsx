@@ -182,6 +182,7 @@ const Card_ = ({ section_ }: Card_Props) => {
       finalList[Math.floor(Math.random() * finalList.length)];
 
     // Get a random item from the selected list
+    // @ts-ignore
     const randomList = curriculum_[randomListName];
     const randomItem =
       randomList[Math.floor(Math.random() * randomList.length)];
@@ -249,6 +250,7 @@ const Card_ = ({ section_ }: Card_Props) => {
 
     for (const question in givenA_) {
       // Make the object extensible
+    // @ts-ignore
       const filteredObject = dataState_.q.find((obj_) => obj_.q === question);
 
       if (filteredObject) {
@@ -259,14 +261,17 @@ const Card_ = ({ section_ }: Card_Props) => {
           tempMap.set(key, value);
         }
         tempList_.push(
+    // @ts-ignore
           Object.fromEntries(tempMap.set("given", givenA_[question]))
         );
+    // @ts-ignore
         if (givenA_[question] == filteredObject.a) {
           result_ = result_ + 1;
         }
       }
     }
 
+    // @ts-ignore
     dataTemp_.q = tempList_;
 
     let finalObj_ = new Map();
@@ -275,6 +280,7 @@ const Card_ = ({ section_ }: Card_Props) => {
     }
     finalObj_.set("r", (result_ / 3) * 100);
     finalObj_.set("uid", user_.uid);
+    // @ts-ignore
     finalObj_.set("c", aux_.category);
 
     console.log(Object.fromEntries(finalObj_));
@@ -415,6 +421,7 @@ const Card_ = ({ section_ }: Card_Props) => {
                     }
                   }
                 }}
+    // @ts-ignore
               >{`${dataState_.q[index].q}`}</p>
             </div>
           );
@@ -422,6 +429,7 @@ const Card_ = ({ section_ }: Card_Props) => {
       {loading_ && (
         <div
           className={`w-[80%] h-[0.5px] bg-black/50 transition-all duration-500 ${
+    // @ts-ignore
             selectedQ_.length > 0 ? "opacity-100" : "opacity-0"
           } ${section_.type == "answers" ? "mb-1" : "mb-2"}`}
         />
